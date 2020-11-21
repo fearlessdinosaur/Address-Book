@@ -57,11 +57,10 @@ public class Address {
     @JoinColumn(name = "PERSON_ID")
     Person owner;
 
-    public Address(String street, String city, String state, String postalCode, Person owner) {
+    public Address(String street, String city, String state, String postalCode) {
         this.street = street;
         this.city = city;
         this.state = state;
         this.postalCode = postalCode;
-        this.owner = owner;
     }
 }

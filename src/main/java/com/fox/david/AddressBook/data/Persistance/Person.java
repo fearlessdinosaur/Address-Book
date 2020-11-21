@@ -1,9 +1,7 @@
 package com.fox.david.AddressBook.data.Persistance;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +12,8 @@ public class Person {
     private Long id;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "owner")
-    private List<Address> addresses;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -43,6 +41,11 @@ public class Person {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setOwner(this);
     }
 
     public Person(String firstName, String lastName) {

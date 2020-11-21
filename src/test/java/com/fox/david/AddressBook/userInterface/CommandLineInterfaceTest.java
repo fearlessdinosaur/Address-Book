@@ -17,7 +17,6 @@ public class CommandLineInterfaceTest {
     @Mock
     PersonDAO personDAO;
 
-    private final String ADD_PERSON = "addPerson James,Smith";
     private final String ERROR_MESSAGE = "could not parse given request";
     private ArrayList<Person> people;
     private String LIST_OUTPUT = "david fox(null)";
