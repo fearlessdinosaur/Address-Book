@@ -54,4 +54,20 @@ public class PersonDAO {
         }
         return "could not find person";
     }
+
+    public String updatePerson(Long id, String firstName, String lastName) {
+        Optional<Person> person = personRepository.findById(id);
+        if (person.isPresent()) {
+            Person personEntity = person.get();
+            if (firstName != null) {
+                personEntity.setFirstName(firstName);
+            }
+            if (lastName != null) {
+                personEntity.setLastName(lastName);
+            }
+            personRepository.save(personEntity);
+            return "successfully updated person";
+        }
+        return "could not find person to update";
+    }
 }

@@ -58,6 +58,12 @@ public class CommandLineInterface implements CommandLineRunner {
                     arguements = input.substring(commandAndArguements[0].length()).split(",");
                     response = personDAO.addAddress(Long.parseLong(arguements[0]), arguements[1], arguements[2], arguements[3], arguements[4]);
                     break;
+                case "changeaddress":
+                    arguements = input.substring(commandAndArguements[0].length()).split(",");
+                    response = addressDAO.updateAddress(Long.parseLong(arguements[0]), arguements[1], arguements[2], arguements[3], arguements[4]);
+                case "changePerson":
+                    arguements = input.substring(commandAndArguements[0].length()).split(",");
+                    response = personDAO.updatePerson(Long.parseLong(arguements[0]), arguements[1], arguements[2]);
                 case "list":
                     List<Person> people = personDAO.list();
                     StringBuilder builder = new StringBuilder();
