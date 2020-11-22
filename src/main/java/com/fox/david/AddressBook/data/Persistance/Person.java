@@ -12,7 +12,7 @@ public class Person {
     private Long id;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     public String getFirstName() {

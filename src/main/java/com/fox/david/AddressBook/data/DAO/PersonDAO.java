@@ -59,10 +59,10 @@ public class PersonDAO {
         Optional<Person> person = personRepository.findById(id);
         if (person.isPresent()) {
             Person personEntity = person.get();
-            if (firstName != null) {
+            if (firstName != null && !firstName.isEmpty()) {
                 personEntity.setFirstName(firstName);
             }
-            if (lastName != null) {
+            if (lastName != null && !lastName.isEmpty()) {
                 personEntity.setLastName(lastName);
             }
             personRepository.save(personEntity);

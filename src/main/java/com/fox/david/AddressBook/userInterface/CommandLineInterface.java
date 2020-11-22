@@ -4,14 +4,13 @@ import com.fox.david.AddressBook.data.DAO.AddressDAO;
 import com.fox.david.AddressBook.data.DAO.PersonDAO;
 import com.fox.david.AddressBook.data.Persistance.Address;
 import com.fox.david.AddressBook.data.Persistance.Person;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
 @Component
-public class CommandLineInterface implements CommandLineRunner {
+public class CommandLineInterface {
 
     PersonDAO personDAO;
     AddressDAO addressDAO;
@@ -25,13 +24,14 @@ public class CommandLineInterface implements CommandLineRunner {
         this.addressDAO = addressDAO;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    public void run() throws Exception {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         do {
             System.out.println("Please enter a command");
-            input = scanner.nextLine();
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
             System.out.println(parse(input));
         } while (!input.equals("Q"));
     }
@@ -49,21 +49,21 @@ public class CommandLineInterface implements CommandLineRunner {
                     response += personDAO.addPerson(arguements[0], arguements[1]);
                     break;
                 case "deleteperson":
-                    response = personDAO.delete(Long.parseLong(commandAndArguements[1]));
+                    response = personDAO.delete(Long.parseLong(commandAndArguements[1].trim()));
                     break;
                 case "deleteaddress":
-                    response = addressDAO.delete(Long.parseLong(commandAndArguements[1]));
+                    response = addressDAO.delete(Long.parseLong(commandAndArguements[1].trim()));
                     break;
                 case "addaddress":
                     arguements = input.substring(commandAndArguements[0].length()).split(",");
-                    response = personDAO.addAddress(Long.parseLong(arguements[0]), arguements[1], arguements[2], arguements[3], arguements[4]);
+                    response = personDAO.addAddress(Long.parseLong(arguements[0].trim()), arguements[1], arguements[2], arguements[3], arguements[4]);
                     break;
                 case "changeaddress":
                     arguements = input.substring(commandAndArguements[0].length()).split(",");
-                    response = addressDAO.updateAddress(Long.parseLong(arguements[0]), arguements[1], arguements[2], arguements[3], arguements[4]);
-                case "changePerson":
+                    response = addressDAO.updateAddress(Long.parseLong(arguements[0].trim()), arguements[1], arguements[2], arguements[3], arguements[4]);
+                case "changeperson":
                     arguements = input.substring(commandAndArguements[0].length()).split(",");
-                    response = personDAO.updatePerson(Long.parseLong(arguements[0]), arguements[1], arguements[2]);
+                    response = personDAO.updatePerson(Long.parseLong(arguements[0].trim()), arguements[1], arguements[2]);
                 case "list":
                     List<Person> people = personDAO.list();
                     StringBuilder builder = new StringBuilder();
