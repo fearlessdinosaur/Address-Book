@@ -34,6 +34,7 @@ public class CommandLineInterface {
             }
             System.out.println(parse(input));
         } while (!input.equals("Q"));
+        System.exit(0);
     }
 
     String parse(String input) {
